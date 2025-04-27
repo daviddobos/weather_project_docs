@@ -92,16 +92,36 @@ weather_categories AS (
             ELSE 'Unknown'
         END AS cloud_coverage_cd
 
-        -- Feels Like Temperature Category
+        -- Temperature Category - Cels
         ,CASE
-            WHEN temp_feelslike_no <= 0 THEN 'Very Cold'
-            WHEN temp_feelslike_no BETWEEN 1 AND 10 THEN 'Cold'
-            WHEN temp_feelslike_no BETWEEN 11 AND 20 THEN 'Cool'
-            WHEN temp_feelslike_no BETWEEN 21 AND 30 THEN 'Warm'
-            WHEN temp_feelslike_no BETWEEN 31 AND 40 THEN 'Hot'
-            WHEN temp_feelslike_no > 40 THEN 'Very Hot'
+            WHEN temp_c_no <= 0 THEN 'Very Cold'
+            WHEN temp_c_no BETWEEN 1 AND 10 THEN 'Cold'
+            WHEN temp_c_no BETWEEN 11 AND 20 THEN 'Cool'
+            WHEN temp_c_no BETWEEN 21 AND 30 THEN 'Warm'
+            WHEN temp_c_no BETWEEN 31 AND 40 THEN 'Hot'
+            WHEN temp_c_no > 40 THEN 'Very Hot'
             ELSE 'Unknown'
-        END AS temp_feelslike_cd
+        END AS temp_c_cd
+        -- Temperature Category - Kelvin
+        ,CASE
+            WHEN temp_k_no <= 0 THEN 'Very Cold'
+            WHEN temp_k_no BETWEEN 1 AND 10 THEN 'Cold'
+            WHEN temp_k_no BETWEEN 11 AND 20 THEN 'Cool'
+            WHEN temp_k_no BETWEEN 21 AND 30 THEN 'Warm'
+            WHEN temp_k_no BETWEEN 31 AND 40 THEN 'Hot'
+            WHEN temp_k_no > 40 THEN 'Very Hot'
+            ELSE 'Unknown'
+        END AS temp_k_cd
+        -- Temperature Category - Fahr
+        ,CASE
+            WHEN temp_f_no <= 0 THEN 'Very Cold'
+            WHEN temp_f_no BETWEEN 1 AND 10 THEN 'Cold'
+            WHEN temp_f_no BETWEEN 11 AND 20 THEN 'Cool'
+            WHEN temp_f_no BETWEEN 21 AND 30 THEN 'Warm'
+            WHEN temp_f_no BETWEEN 31 AND 40 THEN 'Hot'
+            WHEN temp_f_no > 40 THEN 'Very Hot'
+            ELSE 'Unknown'
+        END AS temp_f_cd
 
         -- Humidity Category
         ,CASE
@@ -139,10 +159,12 @@ reorder AS (
         ,precip_mm_no
         ,pressure_mb_no
         ,temp_c_no
+        ,temp_c_cd
         ,temp_f_no
+        ,temp_f_cd
         ,temp_k_no
+        ,temp_k_cd
         ,temp_feelslike_no
-        ,temp_feelslike_cd
         ,date_dtt
         ,time_epoch
         ,rain_chance_pct
